@@ -17,14 +17,20 @@ package de.mathlib.schemas;
 public abstract class AbstractSquareMatrix {
 	
 	private double[][] data;
+	
+	/**
+	 * ToDo: change data type to short?
+	 */
+	private int order;
 
 	/**
 	 * Initialize a nxn matrix where the size is n.
 	 * 
 	 * @param order the size of the matrix
 	 */
-	public AbstractSquareMatrix(int order) {
-		setData(new double[order][order]);
+	public AbstractSquareMatrix(final int order) {
+		this.order = order;
+		setData(new double[this.order][this.order]);
 	}
 	
 	/**
@@ -32,23 +38,45 @@ public abstract class AbstractSquareMatrix {
 	 * 
 	 * @param data in the matrix
 	 */
-	public AbstractSquareMatrix(double[][] data) {
+	public AbstractSquareMatrix(final double[][] data) {
 		if(data == null) {
 			throw new NullPointerException("null values are not allowed");
 		}
 		
-		if(data.length == data[0].length) {
-			setData(data);
-		}
+		setData(data);
 	}
 
 	/**
-	 * Sets a new matrix with default initializing fields.
-	 * 
+	 * Sets a new matrix with default initializing fields. The data should
+	 * contain only data where the size of each dimension are the same and 
+	 * when it is given, the size should be equals to the order as well.
+	 * <p>
+	 * example where order 2:
+	 * <code>double[2][2]</code>
+	 * </p>
 	 * @param data the field data in a matrix
 	 */
 	public void setData(double[][] data) {
-		this.data = data;
+		if((data.length == data[0].length)
+				&& (data.length == order) 
+				&& (data[0].length == order)) {
+			this.data = data;
+		} else {
+			// throwing exception
+		}
+	}
+	
+	/**
+	 * Gets a specific value contained in the matrix.
+	 * 
+	 * @param row specify the row where the value will be found
+	 * @param column specify the column where the value will be found
+	 * @return value of row and column in the matrix
+	 * 
+	 * @author Christian Vogel
+	 */
+	public double getValueOf(int row, int column) {
+		return data[row][column];
 	}
 
 	/**
