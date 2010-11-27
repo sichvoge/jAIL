@@ -117,6 +117,15 @@ public abstract class AbstractSquareMatrix {
 		return data.length;
 	}
 
+	/**
+	 * Calculates the determinant of the matrix with individual algorithms for
+	 * different types of matrices.
+	 * 
+	 * @return determinant of a matrix
+	 * 
+	 * @author Christian Vogel
+	 */
+	public abstract double determinant();
 	
 	@Override
 	public String toString() {

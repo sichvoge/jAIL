@@ -26,4 +26,9 @@ public class SquareMatrix extends AbstractSquareMatrix {
 		super(data);
 	}
 
+	@Override
+	public double determinant() {
+		throw new UnsupportedOperationException();
+	}
+
 }
