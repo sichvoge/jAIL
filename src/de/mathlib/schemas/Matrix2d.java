@@ -9,7 +9,7 @@ package de.mathlib.schemas;
  * 
  * @author Christian Vogel
  */
-public class Matrix2d extends AbstractSquareMatrix {
+public class Matrix2d extends SquareMatrix {
 	
 	/**
 	 * Initialize a 2x2 matrix. Only arrays with a size of 2 are allowed!
