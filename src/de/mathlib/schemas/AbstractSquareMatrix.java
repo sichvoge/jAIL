@@ -3,6 +3,8 @@
  */
 package de.mathlib.schemas;
 
+import de.mathlib.exceptions.MatrixException;
+
 /**
  * This class represents a square matrix. A square matrix is a matrix which has 
  * the same number of rows and columns. An n-by-n matrix is known as a square 
@@ -30,7 +32,12 @@ public abstract class AbstractSquareMatrix {
 	 */
 	public AbstractSquareMatrix(final int order) {
 		this.order = order;
-		setData(new double[this.order][this.order]);
+		try {
+			setData(new double[this.order][this.order]);
+		} catch (MatrixException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -38,12 +45,17 @@ public abstract class AbstractSquareMatrix {
 	 * 
 	 * @param data in the matrix
 	 */
-	public AbstractSquareMatrix(final double[][] data) {
-		if(data == null) {
-			throw new NullPointerException("null values are not allowed");
+	public AbstractSquareMatrix(final double[][] data) {		
+		try {
+			if(data == null) {
+				throw new NullPointerException("null values are not allowed");
+			}
+			
+			setData(data);
+		} catch (MatrixException e) {
+			// handling exception
+			e.printStackTrace();
 		}
-		
-		setData(data);
 	}
 
 	/**
@@ -55,15 +67,20 @@ public abstract class AbstractSquareMatrix {
 	 * <code>double[2][2]</code>
 	 * </p>
 	 * @param data the field data in a matrix
+	 * @throws MatrixException thrown if dimensions does not have the same order or
+	 * they have not the same order as the initialized matrix
 	 */
-	public void setData(double[][] data) {
-		if((data.length == data[0].length)
-				&& (data.length == order) 
-				&& (data[0].length == order)) {
-			this.data = data;
-		} else {
-			// throwing exception
+	public void setData(double[][] data) throws MatrixException {
+		// comment by bytefish (Philipp Wagner) :) 
+		if(data.length != data[0].length) {
+			throw new MatrixException("Data is not a square matrix, because the order of both dimensions are not equal!");
 		}
+		
+		if(data.length != order || data[0].length != order) {
+			throw new MatrixException("The dimension if data should be the same as the order for the matrix!");
+		}
+		
+		this.data = data;
 	}
 	
 	/**
@@ -94,17 +111,21 @@ public abstract class AbstractSquareMatrix {
 	 * 
 	 * @author Christian Vogel
 	 */
-	public final void transpose() {
-		double[][] transposeData = new double[getOrder()][getOrder()];
-		double[][] normalData = get();
-		
-		for(int i = 0; i < normalData.length; i++) {			
-			for(int j = 0; j < normalData[i].length; j++) {
-				transposeData[i][j] = normalData[j][i];
+	public final void transpose() {		
+		try {
+			double[][] transposeData = new double[getOrder()][getOrder()];
+			double[][] normalData = get();
+			
+			for(int i = 0; i < normalData.length; i++) {			
+				for(int j = 0; j < normalData[i].length; j++) {
+					transposeData[i][j] = normalData[j][i];
+				}
 			}
+			
+			setData(transposeData);
+		} catch (MatrixException e) {
+			e.printStackTrace();
 		}
-		
-		setData(transposeData);
 	}
 	
 	/**
@@ -114,7 +135,7 @@ public abstract class AbstractSquareMatrix {
 	 * @return size of the matrix
 	 */
 	public int getOrder() {
-		return data.length;
+		return order;
 	}
 
 	/**
@@ -146,26 +167,31 @@ public abstract class AbstractSquareMatrix {
 
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof AbstractSquareMatrix) {
-			AbstractSquareMatrix m = (AbstractSquareMatrix)obj;
-			
-			if(this.getOrder() == m.getOrder()) {
-				double[][] mData = m.get();
-				
-				for(int row = 0; row < data.length; row++) {
-					for(int column = 0; column < data[row].length; column++) {
-						if(this.data[row][column] != mData[row][column]) {
-							return false;
-						}
-					}
-				}
-			} else {
-				return false;
-			}
-			
-			return true;
-		} else {
+		// comment by bytefish (Philipp Wagner) :)
+		if(obj == null) {
 			return false;
 		}
+		
+		if(!(obj instanceof AbstractSquareMatrix)) {
+			return false;
+		}
+		
+		AbstractSquareMatrix other = (AbstractSquareMatrix)obj;
+		
+		if(this.getOrder() != other.getOrder()) {
+			return false;
+		}
+		
+		double[][] mData = other.get();
+				
+		for(int row = 0; row < data.length; row++) {
+			for(int column = 0; column < data[row].length; column++) {
+				if(this.data[row][column] != mData[row][column]) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
 	}
 }
