@@ -32,23 +32,23 @@ public class Matrix3d extends SquareMatrix {
 			throw new NullPointerException("matrix cannot be null when trying to calculate determinant");
 		}
 		
-		double firstCalc = this.getValueOf(0, 0) * this.getValueOf(1, 1) 
-			* this.getValueOf(2, 2);
+		double firstCalc = this.getElement(0, 0) * this.getElement(1, 1) 
+			* this.getElement(2, 2);
 		
-		double secondCalc = this.getValueOf(0, 1) * this.getValueOf(1, 2) 
-			* this.getValueOf(2, 0);
+		double secondCalc = this.getElement(0, 1) * this.getElement(1, 2) 
+			* this.getElement(2, 0);
 		
-		double thirdCalc = this.getValueOf(0, 2) * this.getValueOf(1, 0) 
-			* this.getValueOf(2, 1);
+		double thirdCalc = this.getElement(0, 2) * this.getElement(1, 0) 
+			* this.getElement(2, 1);
 
-		double fourthCalc = this.getValueOf(2, 0) * this.getValueOf(1, 1) 
-			* this.getValueOf(0, 2);
+		double fourthCalc = this.getElement(2, 0) * this.getElement(1, 1) 
+			* this.getElement(0, 2);
 		
-		double fifthCalc = this.getValueOf(2, 1) * this.getValueOf(1, 2) 
-			* this.getValueOf(0, 0);
+		double fifthCalc = this.getElement(2, 1) * this.getElement(1, 2) 
+			* this.getElement(0, 0);
 		
-		double sixthCalc = this.getValueOf(2, 2) * this.getValueOf(1, 0) 
-			* this.getValueOf(0, 2);
+		double sixthCalc = this.getElement(2, 2) * this.getElement(1, 0) 
+			* this.getElement(0, 2);
 		
 		return firstCalc + secondCalc + thirdCalc 
 			- fourthCalc - fifthCalc - sixthCalc;

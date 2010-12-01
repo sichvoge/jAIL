@@ -35,7 +35,7 @@ public class Matrix2d extends SquareMatrix {
 			throw new NullPointerException("matrix cannot be null when trying to calculate determinant");
 		}
 		
-		return this.getValueOf(0, 0) * this.getValueOf(1, 1) 
-			- this.getValueOf(0, 1) * this.getValueOf(1, 0);
+		return this.getElement(0, 0) * this.getElement(1, 1) 
+			- this.getElement(0, 1) * this.getElement(1, 0);
 	}
 }
