@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.mathlib.schemas;
+package de.mathlib.schemas.matrices;
 
 /**
  * This class represents a 2x2 matrix which is a special square matrix
@@ -12,7 +12,7 @@ package de.mathlib.schemas;
 public class Matrix2d extends SquareMatrix {
 	
 	/**
-	 * Initialize a 2x2 matrix. Only arrays with a size of 2 are allowed!
+	 * Initialize an empty 2x2 matrix. Only arrays with a size of 2 are allowed!
 	 */
 	public Matrix2d() {
 		super(2);
@@ -31,11 +31,11 @@ public class Matrix2d extends SquareMatrix {
 	 */
 	@Override
 	public double determinant() {
-		if(get() == null) {
+		if(getElements() == null) {
 			throw new NullPointerException("matrix cannot be null when trying to calculate determinant");
 		}
 		
-		return this.getElement(0, 0) * this.getElement(1, 1) 
-			- this.getElement(0, 1) * this.getElement(1, 0);
+		return this.getElementAt(0, 0) * this.getElementAt(1, 1) 
+			- this.getElementAt(0, 1) * this.getElementAt(1, 0);
 	}
 }

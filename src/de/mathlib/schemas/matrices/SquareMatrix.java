@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.mathlib.schemas;
+package de.mathlib.schemas.matrices;
 
 import de.mathlib.exceptions.MatrixException;
 
@@ -19,7 +19,7 @@ import de.mathlib.exceptions.MatrixException;
 public class SquareMatrix extends Matrix {
 
 	/**
-	 * Initialize a nxn matrix where the size is n.
+	 * Initialize an empty nxn matrix with order n.
 	 * 
 	 * @param order the size of the matrix
 	 */
@@ -56,7 +56,7 @@ public class SquareMatrix extends Matrix {
 	 * @return size of the matrix
 	 */
 	public int getOrder() {
-		return super.get().length;
+		return super.getElements().length;
 	}
 
 	/**

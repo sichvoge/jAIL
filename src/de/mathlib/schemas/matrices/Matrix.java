@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.mathlib.schemas;
+package de.mathlib.schemas.matrices;
 
 import de.mathlib.exceptions.MatrixException;
 
@@ -27,12 +27,12 @@ public class Matrix implements Cloneable {
 	private int column_order = 0;
 	
 	/**
-	 * Initialize a default mxn matrix.
+	 * Initialize an empty mxn matrix.
 	 */
 	public Matrix() {}
 	
 	/**
-	 * Initialize a default mxn matrix.
+	 * Initialize an empty mxn matrix.
 	 * 
 	 * @param row_order defines how much rows are possible in the matrix
 	 * @param column_order defines how much columns are possible in the matrix
@@ -55,7 +55,7 @@ public class Matrix implements Cloneable {
 	 * @param data the field data in a matrix
 	 * @throws MatrixException thrown if the setting process fails
 	 */
-	public void setData(double[][] data) throws MatrixException {
+	public void setData(final double[][] data) throws MatrixException {
 		if(data == null) {
 			throw new NullPointerException("data cannot be null");
 		}
@@ -73,11 +73,29 @@ public class Matrix implements Cloneable {
 	}
 	
 	/**
-	 * Gets all values stored in the matrix.
+	 * Returns the number of rows.
+	 * 
+	 * @return number of rows in the matrix
+	 */
+	public final int numberOfRows() {
+		return row_order;
+	}
+	
+	/**
+	 *  Returns the number of columns.
+	 * 
+	 * @return number of columns in the matrix
+	 */
+	public final int numberOfColumns() {
+		return column_order;
+	}
+	
+	/**
+	 * Gets all entries stored in the matrix.
 	 * 
 	 * @return the data in a matrix
 	 */
-	public double[][] get() {
+	public final double[][] getElements() {
 		return data;
 	}
 	
@@ -90,17 +108,29 @@ public class Matrix implements Cloneable {
 	 * 
 	 * @author Christian Vogel
 	 */
-	public double getElement(int row, int column) {
+	public final double getElementAt(int row, int column) {
+		if(row > numberOfRows()) {
+			throw new IndexOutOfBoundsException("row should be not greater than the number of rows in the matrix");
+		}
+		
+		if(column > numberOfColumns()) {
+			throw new IndexOutOfBoundsException("column should be not greater than the number of columns in the matrix");
+		}
+		
 		return data[row][column];
 	}
 	
 	/**
 	 * Transposes this matrix in place.
+	 * <p>
+	 * The transpose of a m-by-n matrix A is the n-by-m matrix 
+	 * formed by turning rows into columns and vice versa.
+	 * </p>
 	 * 
 	 * @author Christian Vogel
 	 */
 	public final void transpose() throws MatrixException {
-		double[][] normalData = get();
+		double[][] normalData = getElements();
 		
 		if(normalData == null) {
 			throw new MatrixException("data cannot be null");
@@ -125,11 +155,13 @@ public class Matrix implements Cloneable {
 	 * @return new matrix with multiplied entries
 	 * 
 	 * @throws MatrixException thrown if multiplying fails
+	 * 
+	 * @author Christian Vogel
 	 */
-	public Matrix multiply(int scalar) throws MatrixException {
+	public final Matrix multiply(double scalar) throws MatrixException {
 		Matrix newMatrix = new Matrix(row_order, column_order);
 		
-		double[][] normalData = get();
+		double[][] normalData = getElements();
 		
 		if(normalData == null) {
 			throw new MatrixException("data cannot be null");
@@ -155,20 +187,26 @@ public class Matrix implements Cloneable {
 	 * product AB is the m-by-p matrix whose entries are given by dot-product 
 	 * of the corresponding row of A and the corresponding column of B.
 	 * 
-	 * @param arg
-	 * @return
-	 * @throws MatrixException
+	 * @param arg represents matrix B
+	 * @return a new instance of the multiplied matrix
+	 * @throws MatrixException thrown if multiplying fails
+	 * 
+	 * @author Christian Vogel
 	 */
-	public Matrix multiply(Matrix arg) throws MatrixException {
+	public final Matrix multiply(Matrix arg) throws MatrixException {
 		Matrix newMatrix = new Matrix();
 		
-		double[][] normalData = get();
+		double[][] normalData = getElements();
 		
 		if(normalData == null) {
 			throw new MatrixException("data cannot be null");
 		}
 		
-		double[][] argMatrix = arg.get();
+		if(arg == null) {
+			throw new MatrixException("argument cannot be null");
+		}
+		
+		double[][] argMatrix = arg.getElements();
 		
 		if(normalData[0].length != argMatrix.length) {
 			throw new MatrixException("number of columns in matrix A should be the same as the number of rows in matrix B");
@@ -185,6 +223,50 @@ public class Matrix implements Cloneable {
 				}
 				
 				newData[i][j] = value;
+			}
+		}
+		
+		newMatrix.setData(newData);
+		
+		return newMatrix;
+	}
+	
+	/**
+	 * Two matrices can be aggregated, if matrix A is from the same type
+	 * like matrix B. Type means that the number of rows and columns are
+	 * the same in both matrices. The sum of A+B will be calculated
+	 * by aggregating each entry of both matrices.
+	 * 
+	 * 
+	 * @param arg represents matrix B
+	 * @return a new instance of the aggregated matrix
+	 * @throws MatrixException thrown if aggregating fails
+	 */
+	public final Matrix aggregate(Matrix arg) throws MatrixException {
+		Matrix newMatrix = new Matrix();
+		
+		double[][] normalData = getElements();
+		
+		if(normalData == null) {
+			throw new MatrixException("data cannot be null");
+		}
+		
+		if(arg == null) {
+			throw new MatrixException("argument cannot be null");
+		}
+
+		double[][] argMatrix = arg.getElements();
+		
+		if(normalData.length != argMatrix.length
+				&& normalData[0].length != argMatrix[0].length) {
+			throw new MatrixException("number of columns in matrix A should be the same as the number of rows in matrix B");
+		}
+		
+		double[][] newData = new double[normalData.length][normalData[0].length];
+		
+		for(int i = 0; i < normalData.length; i++) {
+			for(int j = 0; j < normalData[0].length; j++) {
+				newData[i][j] = normalData[i][j] + argMatrix[i][j];
 			}
 		}
 		
@@ -223,8 +305,8 @@ public class Matrix implements Cloneable {
 		
 		Matrix other = (Matrix)obj;
 		
-		double[][] otherData = other.get();
-		double[][] actualData = get();
+		double[][] otherData = other.getElements();
+		double[][] actualData = getElements();
 		
 		if(actualData.length != otherData.length
 				&& actualData[0].length != otherData[0].length) {
@@ -244,7 +326,7 @@ public class Matrix implements Cloneable {
 	
 	@Override
 	public Matrix clone() {
-		double[][] normalData = get();
+		double[][] normalData = getElements();
 		
 		if(normalData == null) {
 			return null;

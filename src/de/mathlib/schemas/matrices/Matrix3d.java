@@ -1,4 +1,4 @@
-package de.mathlib.schemas;
+package de.mathlib.schemas.matrices;
 
 /**
  * This class represents a 3x3 matrix which is a special square matrix
@@ -9,7 +9,7 @@ package de.mathlib.schemas;
 public class Matrix3d extends SquareMatrix {
 
 	/**
-	 * Initialize a 3x3 matrix. Only arrays with a size of 3 are allowed!
+	 * Initialize an empty 3x3 matrix. Only arrays with a size of 3 are allowed!
 	 */
 	public Matrix3d() {
 		super(3);
@@ -28,27 +28,27 @@ public class Matrix3d extends SquareMatrix {
 	 */
 	@Override
 	public double determinant() {
-		if(get() == null) {
+		if(getElements() == null) {
 			throw new NullPointerException("matrix cannot be null when trying to calculate determinant");
 		}
 		
-		double firstCalc = this.getElement(0, 0) * this.getElement(1, 1) 
-			* this.getElement(2, 2);
+		double firstCalc = this.getElementAt(0, 0) * this.getElementAt(1, 1) 
+			* this.getElementAt(2, 2);
 		
-		double secondCalc = this.getElement(0, 1) * this.getElement(1, 2) 
-			* this.getElement(2, 0);
+		double secondCalc = this.getElementAt(0, 1) * this.getElementAt(1, 2) 
+			* this.getElementAt(2, 0);
 		
-		double thirdCalc = this.getElement(0, 2) * this.getElement(1, 0) 
-			* this.getElement(2, 1);
+		double thirdCalc = this.getElementAt(0, 2) * this.getElementAt(1, 0) 
+			* this.getElementAt(2, 1);
 
-		double fourthCalc = this.getElement(2, 0) * this.getElement(1, 1) 
-			* this.getElement(0, 2);
+		double fourthCalc = this.getElementAt(2, 0) * this.getElementAt(1, 1) 
+			* this.getElementAt(0, 2);
 		
-		double fifthCalc = this.getElement(2, 1) * this.getElement(1, 2) 
-			* this.getElement(0, 0);
+		double fifthCalc = this.getElementAt(2, 1) * this.getElementAt(1, 2) 
+			* this.getElementAt(0, 0);
 		
-		double sixthCalc = this.getElement(2, 2) * this.getElement(1, 0) 
-			* this.getElement(0, 2);
+		double sixthCalc = this.getElementAt(2, 2) * this.getElementAt(1, 0) 
+			* this.getElementAt(0, 2);
 		
 		return firstCalc + secondCalc + thirdCalc 
 			- fourthCalc - fifthCalc - sixthCalc;
