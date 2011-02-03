@@ -275,6 +275,10 @@ public class Matrix implements Cloneable {
 		return newMatrix;
 	}
 	
+	/**
+	 * Returns a string representation of a {@code Matrix}, where all data will be shown as usual for a matrix in 
+	 * rows and columns.  
+	 */
 	@Override
 	public String toString() {
 		StringBuilder matrixBuilder = new StringBuilder();
