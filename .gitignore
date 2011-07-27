@@ -6,3 +6,7 @@
 # compiled sources #
 ####################
 *.class
+
+# do not ignore this file #
+###########################
+!.gitignore
