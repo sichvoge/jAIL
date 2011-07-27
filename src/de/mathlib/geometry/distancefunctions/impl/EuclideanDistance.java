@@ -14,7 +14,7 @@ import de.mathlib.geometry.schemas.Point;
  * 
  * @author Christian Vogel
  */
-public class EuclideanDistance implements IDistanceFunction {
+public class EuclideanDistance implements IDistanceFunction<Point> {
 
 	/* (non-Javadoc)
 	 * @see de.mathlib.geometry.distancefunctions.IDistanceFunction#calculate(de.mathlib.geometry.schemas.Point, de.mathlib.geometry.schemas.Point)

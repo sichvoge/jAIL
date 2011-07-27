@@ -1,20 +1,20 @@
 package de.mathlib.geometry.distancefunctions;
 
-import de.mathlib.geometry.schemas.Point;
-
 /**
- * Interface introducing a default distance calculating function for all implementations.
+ * Interface introducing a default distance calculating function for all implementations. The generic {@code <T>}
+ * defines the type of the input for the function. There are some distance functions who will have different 
+ * inputs like other functions.
  * 
  * @author Christian Vogel
  */
-public interface IDistanceFunction {
+public interface IDistanceFunction<T> {
 	/**
-	 * Calculates the distance between two points.
+	 * Calculates the distance between two arguments.
 	 * 
-	 * @param arg1 first point
-	 * @param arg2 second point  	 
+	 * @param arg1 first argument
+	 * @param arg2 second argument  	 
 	 *  
-	 * @return the calculated distance between first and second point
+	 * @return the calculated distance between first and second argument
 	 */
-	double calculate(Point arg1, Point arg2);
+	double calculate(T arg1, T arg2);
 }

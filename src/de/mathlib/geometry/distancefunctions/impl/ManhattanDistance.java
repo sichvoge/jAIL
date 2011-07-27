@@ -12,7 +12,7 @@ import de.mathlib.geometry.schemas.Point;
  * 
  * @author Christian Vogel
  */
-public class ManhattanDistance implements IDistanceFunction {
+public class ManhattanDistance implements IDistanceFunction<Point> {
 
 	/* (non-Javadoc)
 	 * @see de.mathlib.geometry.distancefunctions.IDistanceFunction#calculate(de.mathlib.geometry.schemas.Point, de.mathlib.geometry.schemas.Point)
