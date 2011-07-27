@@ -1,0 +1,5 @@
+= 27th July 2011 =
+
+* Added new schema for points in n-dimensional space
+* Added new package "de.mathlib.geometry.distancefunctions" which will contain several implementations of distance functions
+* Added distance functions EuclideanDistance.java and ManhattanDistance.java
