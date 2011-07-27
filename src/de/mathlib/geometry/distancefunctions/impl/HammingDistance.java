@@ -1,6 +1,6 @@
 package de.mathlib.geometry.distancefunctions.impl;
 
-import de.mathlib.geometry.distancefunctions.IDistanceFunction;
+import de.mathlib.geometry.distancefunctions.StringBasedDistanceFunction;
 
 /**
  * This class calculates the distance between two strings. The hamming distance
@@ -12,37 +12,33 @@ import de.mathlib.geometry.distancefunctions.IDistanceFunction;
  * 
  * @author Christian Vogel
  */
-public class HammingDistance implements IDistanceFunction {
+public class HammingDistance implements StringBasedDistanceFunction {
+	
+	/**
+	 * Default constructor doing nothing special.
+	 */
+	public HammingDistance() {}
 
 	/**
-	 * Calculates the distance between two strings. Both arguments should be
-	 * of type {@link String}. If one of these are not of this type, a {code IllegalArgumentException}
-	 * will be thrown.
+	 * Calculates the distance between two strings.
 	 */
 	/* (non-Javadoc)
 	 * @see de.mathlib.geometry.distancefunctions.IDistanceFunction#calculate(String, String)
 	 */
 	@Override
-	public double calculate(Object arg1, Object arg2) {
+	public double calculate(String arg1, String arg2) {
 		if(arg1 == null || arg2 == null) {
 			throw new IllegalArgumentException("Arguments should not be null!");
 		}
 		
-		if(!(arg1 instanceof String) || !(arg2 instanceof String)) {
-			throw new IllegalArgumentException("arguments should be of class String");
-		}
-		
-		String str1 = (String)arg1;
-		String str2 = (String)arg2;
-		
-		if(str1.length() != str2.length()) {
+		if(arg1.length() != arg2.length()) {
 			throw new IllegalArgumentException("Both string should have the same number of characters!");
 		}
 		
 		double dist = 0;
 		
-		for(int i = 0; i < str1.length(); i++) {
-			if(str1.charAt(i) != str2.charAt(i)) {
+		for(int i = 0; i < arg1.length(); i++) {
+			if(arg1.charAt(i) != arg2.charAt(i)) {
 				dist++;
 			}
 		}

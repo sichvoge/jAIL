@@ -15,6 +15,10 @@ public class Point {
 		
 	}
 	
+	public Point(double[] vector) {
+		this.vector = vector;
+	}
+	
 	public Point(int dim) {
 		vector = new double[dim];
 	}

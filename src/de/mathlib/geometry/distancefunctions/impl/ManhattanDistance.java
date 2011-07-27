@@ -1,6 +1,6 @@
 package de.mathlib.geometry.distancefunctions.impl;
 
-import de.mathlib.geometry.distancefunctions.IDistanceFunction;
+import de.mathlib.geometry.distancefunctions.PointBasedDistanceFunction;
 import de.mathlib.geometry.schemas.Point;
 
 /**
@@ -12,28 +12,27 @@ import de.mathlib.geometry.schemas.Point;
  * 
  * @author Christian Vogel
  */
-public class ManhattanDistance implements IDistanceFunction {
+public class ManhattanDistance implements PointBasedDistanceFunction {
+	
+	/**
+	 * Default constructor doing nothing special.
+	 */
+	public ManhattanDistance() {}
 
 	/**
-	 * Calculates the distance between two points. Both arguments should be
-	 * of type {@link Point}. If one of these are not of this type, a {code IllegalArgumentException}
-	 * will be thrown.
+	 * Calculates the distance between two points.
 	 */
 	/* (non-Javadoc)
 	 * @see de.mathlib.geometry.distancefunctions.IDistanceFunction#calculate(de.mathlib.geometry.schemas.Point, de.mathlib.geometry.schemas.Point)
 	 */
 	@Override
-	public double calculate(Object arg1, Object arg2) {
+	public double calculate(Point arg1, Point arg2) {
 		if(arg1 == null || arg2 == null) {
 			throw new IllegalArgumentException("arguments cannot be null");
 		}
 		
-		if(!(arg1 instanceof Point) || !(arg2 instanceof Point)) {
-			throw new IllegalArgumentException("arguments should be of class Point");
-		}
-		
-		final double[] vector1 = ((Point)arg1).getVector();
-		final double[] vector2 = ((Point)arg2).getVector();
+		final double[] vector1 = arg1.getVector();
+		final double[] vector2 = arg2.getVector();
 		
 		if(vector1.length != vector2.length) {
 			throw new IllegalArgumentException("Both points should be in the same dimensional space.");
