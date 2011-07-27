@@ -1,0 +1,8 @@
+# eclipse project files #
+#########################
+.classpath
+.project
+
+# compiled sources #
+####################
+*.class
