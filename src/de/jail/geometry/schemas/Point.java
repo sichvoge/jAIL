@@ -11,16 +11,54 @@ public class Point {
 	
 	private double[] vector;
 	
-	public Point() {
-		
-	}
-	
 	public Point(double[] vector) {
 		this.vector = vector;
 	}
 	
 	public Point(int dim) {
 		vector = new double[dim];
+	}
+	
+	/**
+	 * Addition of this point with a defined one.
+	 * 
+	 * @param other 
+	 * @return the result of point addition
+	 */
+	public Point add(final Point other) {
+		if(other == null) {
+			throw new IllegalArgumentException("argument must not be null");
+		}
+		
+		if(!this.equals(other)) {
+			throw new IllegalArgumentException("points not equal means calculation not possible");
+		}
+		
+		double[] otherVector = other.getVector();
+		
+		double[] sumVector = new double[vector.length];
+		
+		for(int i = 0; i < vector.length; i++) {
+			sumVector[i] = vector[i] + otherVector[i];
+		}
+		
+		return new Point(sumVector);
+	}
+	
+	/**
+	 * Multiplies a scalar value to this point.
+	 * 
+	 * @param scalar value for multiplying
+	 * @return new calculated point
+	 */
+	public Point multiply(final double scalar) {
+		double[] result = new double[vector.length];
+		
+		for(int i = 0; i < vector.length; i++) {
+			result[i] = scalar * vector[i];
+		}
+		
+		return new Point(result);
 	}
 	
 	public double[] getVector() {
