@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.jail.statistic.clustering.kmeans;
+package de.jail.statistic.clustering.partitional.kmeans;
 
 import de.jail.geometry.schemas.Point;
 import de.jail.statistic.clustering.Cluster;

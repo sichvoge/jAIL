@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.jail.statistic.clustering.kmeans;
+package de.jail.statistic.clustering.partitional.kmeans;
 
 import java.util.Collection;
 import java.util.List;

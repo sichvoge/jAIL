@@ -1,4 +1,4 @@
-package de.jail.statistic.clustering;
+package de.jail.statistic.clustering.density;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -7,6 +7,8 @@ import java.util.List;
 import de.jail.geometry.distancefunctions.PointBasedDistanceFunction;
 import de.jail.geometry.distancefunctions.impl.EuclideanDistance;
 import de.jail.geometry.schemas.Point;
+import de.jail.statistic.clustering.Cluster;
+import de.jail.statistic.clustering.Clusterer;
 
 /**
  * @author Christian Vogel

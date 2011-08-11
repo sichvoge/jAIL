@@ -12,7 +12,7 @@ import org.junit.Test;
 import de.jail.geometry.schemas.Point;
 import de.jail.statistic.clustering.Cluster;
 import de.jail.statistic.clustering.Clusterer;
-import de.jail.statistic.clustering.DBScan;
+import de.jail.statistic.clustering.density.DBScan;
 
 /**
  * @author Christian Vogel
@@ -55,7 +55,7 @@ public class DBScanTest {
 	}
 
 	/**
-	 * Test method for {@link de.jail.statistic.clustering.DBScan#cluster(java.util.Collection)}.
+	 * Test method for {@link de.jail.statistic.clustering.density.DBScan#cluster(java.util.Collection)}.
 	 */
 	@Test
 	public void testCluster() {
