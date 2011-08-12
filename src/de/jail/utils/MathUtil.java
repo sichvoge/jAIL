@@ -98,6 +98,10 @@ public class MathUtil {
 			throw new IllegalArgumentException("argument must not be null");
 		}
 		
+		if(points.size() == 0) {
+			return null;
+		}
+		
 		Point mean = null;
 		
 		for(Point p : points) {

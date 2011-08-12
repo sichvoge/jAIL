@@ -3,6 +3,7 @@
  */
 package de.jail.statistic.clustering.partitional.kmeans;
 
+import de.jail.geometry.schemas.Centroid;
 import de.jail.geometry.schemas.Point;
 import de.jail.statistic.clustering.Cluster;
 
@@ -14,7 +15,7 @@ import de.jail.statistic.clustering.Cluster;
  */
 public class KMeansCluster extends Cluster {
 	
-	private Point center;
+	private Centroid center;
 	
 	/**
 	 * Default constructor doing nothing special.
@@ -24,11 +25,11 @@ public class KMeansCluster extends Cluster {
 	}
 
 	/**
-	 * Returns the current center point of this cluster.
+	 * Returns the current centroid of this cluster.
 	 * 
 	 * @return the center point
 	 */
-	public Point getCenter() {
+	public Centroid getCenter() {
 		return center;
 	}
 	
@@ -38,6 +39,6 @@ public class KMeansCluster extends Cluster {
 	 * @param center normal point
 	 */
 	public void setCenter(Point center) {
-		this.center = center;
+		this.center = new Centroid(center);
 	}
 }
