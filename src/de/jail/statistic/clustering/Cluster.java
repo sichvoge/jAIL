@@ -25,6 +25,15 @@ public class Cluster {
 	}
 	
 	/**
+	 * Returns the number of points in the cluster.
+	 * 
+	 * @return number of clustered points
+	 */
+	public final int size() {
+		return points.size();
+	}
+	
+	/**
 	 * Adds a point to this cluster.
 	 * 
 	 * @param point related to this cluster
