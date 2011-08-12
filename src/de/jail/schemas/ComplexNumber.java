@@ -3,8 +3,8 @@
  */
 package de.jail.schemas;
 
-import de.jail.MathLib;
 import de.jail.interfaces.IDefaultOperator;
+import de.jail.utils.MathUtil;
 
 /**
  * This class represents a complex number.  A complex number is a number 
@@ -109,8 +109,8 @@ public class ComplexNumber implements IDefaultOperator<ComplexNumber> {
 			throw new NullPointerException("arg cannot be null");
 		}
 		
-		double resultRe = (this.re * arg.re + this.im * arg.im) / (MathLib.square(arg.re) + MathLib.square(arg.im));
-		double resultIm = (this.im * arg.re - this.re * arg.im) / (MathLib.square(arg.re) + MathLib.square(arg.im));
+		double resultRe = (this.re * arg.re + this.im * arg.im) / (MathUtil.square(arg.re) + MathUtil.square(arg.im));
+		double resultIm = (this.im * arg.re - this.re * arg.im) / (MathUtil.square(arg.re) + MathUtil.square(arg.im));
 		
 		return new ComplexNumber(resultRe, resultIm);
 	}
