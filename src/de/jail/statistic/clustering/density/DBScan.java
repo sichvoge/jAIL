@@ -109,7 +109,7 @@ public class DBScan implements Clusterer {
 	}
 	
 	/**
-	 * Finds all neighbors from a given point and which are in a specific area.
+	 * Finds all neighbors from a given point which are in a specific area.
 	 * 
 	 * @param point_id point position in the computed distance matrix
 	 * @param eps defines the area in which a neighbor point should be
@@ -120,7 +120,7 @@ public class DBScan implements Clusterer {
 		List<Integer> result = new ArrayList<Integer>();
 		
 		for(int ptrIndex = 0; ptrIndex < distanceMatrix.length; ptrIndex++) {
-			if((point_id != ptrIndex) && (distanceMatrix[point_id][ptrIndex] < eps)) {
+			if((point_id != ptrIndex) && (distanceMatrix[ptrIndex][point_id] < eps)) {
 				result.add(ptrIndex);
 			}
 		}
