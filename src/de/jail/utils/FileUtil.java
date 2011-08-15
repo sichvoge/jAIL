@@ -57,7 +57,6 @@ public class FileUtil {
 		BufferedReader br = new BufferedReader(new InputStreamReader(in));
 		
 		String strLine;
-		int lineNumber = 1;
 		
 		boolean ignoreFirstLine = containsHeader;
 		
@@ -76,8 +75,6 @@ public class FileUtil {
 			}
 			
 			points.add(new Point(vector));
-			
-			lineNumber++;
 		}
 		
 		return points;
