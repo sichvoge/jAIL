@@ -5,6 +5,7 @@ package de.jail.utils;
 
 import java.util.Collection;
 
+import de.jail.geometry.schemas.Centroid;
 import de.jail.geometry.schemas.Point;
 
 /**
@@ -91,9 +92,11 @@ public class MathUtil {
 	 * Calculates the mean from a collection of points.
 	 * 
 	 * @param points collection of points
-	 * @return calculated mean
+	 * @return calculated mean point
+	 * 
+	 * @see Centroid
 	 */
-	public static Point mean(Collection<Point> points) {
+	public static Centroid mean(Collection<Point> points) {
 		if(points == null) {
 			throw new IllegalArgumentException("argument must not be null");
 		}
@@ -112,6 +115,8 @@ public class MathUtil {
 			}
 		}
 		
-		return mean.multiply(points.size());
+		Point center = mean.multiply(1.0/(double)points.size());
+		
+		return new Centroid(center);
 	}
 }

@@ -19,6 +19,10 @@ public class Point {
 		vector = new double[dim];
 	}
 	
+	public int getDimension() {
+		return vector.length;
+	}
+	
 	/**
 	 * Addition of this point with a defined one.
 	 * 
@@ -30,8 +34,8 @@ public class Point {
 			throw new IllegalArgumentException("argument must not be null");
 		}
 		
-		if(!this.equals(other)) {
-			throw new IllegalArgumentException("points not equal means calculation not possible");
+		if(this.getDimension() != other.getDimension()) {
+			throw new IllegalArgumentException("points not equal, means calculation not possible");
 		}
 		
 		double[] otherVector = other.getVector();
