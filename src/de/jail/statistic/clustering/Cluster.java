@@ -55,5 +55,15 @@ public class Cluster {
 	public final List<Point> getAllPoints() {
 		return points;
 	}
+	
+	/**
+	 * Returns if a given point is a part of this cluster or not.
+	 * 
+	 * @param point to be in the cluster
+	 * @return {@code true}, if point  is part of the cluster, otherwise {@code false}
+	 */
+	public final boolean containPoint(final Point point) {
+		return points.contains(point);
+	}
 
 }
