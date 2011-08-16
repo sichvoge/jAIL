@@ -5,6 +5,7 @@
 
 # compiled sources #
 ####################
+bin
 *.class
 
 # do not ignore this file #
