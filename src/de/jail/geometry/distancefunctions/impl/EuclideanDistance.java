@@ -22,10 +22,7 @@ public class EuclideanDistance implements PointBasedDistanceFunction {
 	public EuclideanDistance() {}
 
 	/**
-	 * Calculates the distance between two points.
-	 */
-	/* (non-Javadoc)
-	 * @see de.mathlib.geometry.distancefunctions.IDistanceFunction#calculate(de.mathlib.geometry.schemas.Point, de.mathlib.geometry.schemas.Point)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public double calculate(Point arg1, Point arg2) {
@@ -43,7 +40,7 @@ public class EuclideanDistance implements PointBasedDistanceFunction {
 		double sum = 0;
 		
 		for(int i = 0; i < vector1.length; i++) {
-			sum = Math.pow((vector1[i] - vector2[i]), 2);
+			sum += Math.pow((vector1[i] - vector2[i]), 2);
 		}
 		
 		return Math.sqrt(sum);

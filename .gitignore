@@ -1,13 +1,14 @@
-# eclipse project files #
-#########################
+# eclipse project files 
 .classpath
 .project
+.settings
 
-# compiled sources #
-####################
+# compiled sources 
 bin
 *.class
 
-# do not ignore this file #
-###########################
+# Mac
+.DS_Store
+
+# do not ignore this file 
 !.gitignore
